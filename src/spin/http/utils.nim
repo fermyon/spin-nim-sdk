@@ -1,8 +1,14 @@
-import private/http_types
-import std/options
+import private/types
+import std/[options, tables]
 
-proc `?`*(x: HttpHeaders | HttpParams, key: string): Option[string] =
-  if x.hasKey(key):
-    some(x["key"])
+proc `?&`*(headers: HttpHeaders, key: string): Option[string] =
+  if headers.hasKey(key):
+    some(headers[key])
   else:
     none(string)
+
+proc `?&`*(params: seq[tuple[key, value: string]], key: string): Option[string] =
+  for (k, v) in params:
+    if k == key:
+      return some(v)
+  return none(string)

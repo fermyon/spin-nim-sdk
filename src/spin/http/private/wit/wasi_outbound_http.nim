@@ -4,7 +4,7 @@ from os import splitPath
 
 {.push hint[ConvFromXtoItselfNotNeeded]: off.}
 
-{.compile: currentSourcePath().splitPath.head & "/c/spin-http.c".}
+{.compile: currentSourcePath().splitPath.head & "/c/wasi-outbound-http.c".}
 
 {.pragma: impwasioutboundhttpHdr, header: currentSourcePath().splitPath.head & "/c/wasi-outbound-http.h".}
 {.experimental: "codeReordering".}

@@ -1,16 +1,21 @@
-import std/[options, tables]
+import std/[options, tables, uri]
 from std/httpclient import HttpMethod
+export HttpMethod
 
 type
-  HttpParams* = TableRef[string, string]
   HttpHeaders* = TableRef[string, string]
   Request* = object
     `method`*: HttpMethod
-    uri*: string
+    uri*: Uri
     headers*: HttpHeaders
-    params*: HttpParams
     body*: Option[string]
   Response* = object
     status*: uint16
     headers*: Option[HttpHeaders]
     body*: Option[string]
+  WasiCode* = enum
+    Success
+    DestinationNotAllowed
+    InvalidUrl
+    RequestError
+    RuntimeError
